@@ -8,3 +8,6 @@ export interface ICommentData {
   comment: string;
   avatar: { "0": any }
 }
+export interface IComments {
+  comments: ICommentData[],
+}

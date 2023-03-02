@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import { changeCallbackType, avatarSchemaType } from '../../types/types';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { IAddComment } from '../../types/interfaces';
-import logo from '../assets/userpic.png';
+import logo from '../../assets/userpic.png';
 import * as S from './AddCommentStyles';
 
 const USER_DATA_MAX_LENGTH = 150;
