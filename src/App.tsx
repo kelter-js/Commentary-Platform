@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <MainContainer>
-      <VisuallyHidden>Platform to share your opinion with others</VisuallyHidden>
+      <VisuallyHidden tag='h1'>Platform to share your opinion with others</VisuallyHidden>
       <AddComment onAddComment={setComments} />
       {/*<Comments comments={commentsList}/> */}
     </MainContainer>

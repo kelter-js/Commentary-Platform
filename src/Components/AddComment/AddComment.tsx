@@ -10,6 +10,7 @@ import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { TextField, Button } from '@mui/material';
 import logo from '../../assets/userpic.png';
 import * as S from './AddCommentStyles';
+import VisuallyHidden from '../../Common/VisuallyHidden';
 import { v1 } from 'uuid';
 
 const USER_DATA_MAX_LENGTH = 150;
@@ -93,6 +94,7 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
 
   return (
     <S.AddCommentContainer>
+      <VisuallyHidden tag='h2'>Please, fill and submit form with information about you</VisuallyHidden>
       <S.CommentForm
         onSubmit={handleSubmit(onSubmit)}
       >
