@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-interface IVisuallyHidden { children: React.ReactNode }
+import { IWrapper } from '../types/interfaces';
 
 const Hider = styled.h1`
   position: absolute;
@@ -16,7 +15,7 @@ const Hider = styled.h1`
   overflow: hidden;
 `;
 
-const VisuallyHidden = ({ children }: IVisuallyHidden): JSX.Element => {
+const VisuallyHidden = ({ children }: IWrapper): JSX.Element => {
   return (
     <Hider>
       {children}

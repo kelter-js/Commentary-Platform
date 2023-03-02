@@ -1,13 +1,12 @@
 import React from 'react';
+import MainContainer from './Components/Main';
 import VisuallyHidden from './Common/VisuallyHidden';
 
 const App = () => {
   return (
-    <>
-      <main>
-        <VisuallyHidden>Platform to share your opinion with others</VisuallyHidden>
-      </main>
-    </>
+    <MainContainer>
+      <VisuallyHidden>Platform to share your opinion with others</VisuallyHidden>
+    </MainContainer>
   );
 }
 
