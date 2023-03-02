@@ -13,7 +13,7 @@ import * as S from './AddCommentStyles';
 import { v1 } from 'uuid';
 
 const USER_DATA_MAX_LENGTH = 150;
-const USER_COMMENT_MAX_LENGTH = 3000;
+const USER_COMMENT_MAX_LENGTH = 500;
 
 const schema = yup.object().shape({
   email: yup.string().max(USER_DATA_MAX_LENGTH).email().required(),

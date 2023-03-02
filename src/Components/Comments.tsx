@@ -1,4 +1,5 @@
 import React from 'react';
+import Comment from './Comment/Comment';
 import { IComments } from '../types/interfaces';
 
 const Comments = ({ comments }: IComments): JSX.Element => {

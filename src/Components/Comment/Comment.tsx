@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ICommentProps } from '../../types/interfaces';
 import { Button } from '@mui/material';
 
-const Comments = ({ data }: ICommentProps): JSX.Element => {
+const Comment = ({ data }: ICommentProps): JSX.Element => {
   const [raiting, setRaiting] = useState(data.raiting);
 
   const onRaitingChange = (e: React.MouseEvent<HTMLElement>) => {
@@ -14,7 +14,7 @@ const Comments = ({ data }: ICommentProps): JSX.Element => {
   return (
     <li>
       <img src={data.avatar} alt='' />
-      <p>{data.author}</p>
+      <h3>{data.author}</h3>
       <p>{data.comment}</p>
       <p>{data.date}</p>
       <p>{raiting}</p>
@@ -24,4 +24,4 @@ const Comments = ({ data }: ICommentProps): JSX.Element => {
   );
 }
 
-export default Comments;
+export default Comment;
