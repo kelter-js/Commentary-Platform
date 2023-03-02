@@ -2,76 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Button from '@mui/material/Button';
-import { changeCallbackType, avatarSchemaType } from '../types/types';
+import { changeCallbackType, avatarSchemaType } from '../../types/types';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-import { IAddComment } from '../types/interfaces';
-import styled from 'styled-components';
+import { IAddComment } from '../../types/interfaces';
 import logo from '../assets/userpic.png';
-
-const AddCommentContainer = styled.section`
-  border: 1px solid black;
-  margin: 15px;
-  padding: 5px;
-`;
-
-const CommentForm = styled.form`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CommentInputContainer = styled.div`
-  width: 70%;
-
-  & .MuiTextField-root {
-    width: 100%;
-  }
-`;
-
-const UserDataContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  & .MuiTextField-root {
-    margin-bottom: 10px;
-  }
-
-  & .MuiTextField-root:last-of-type {
-    margin-bottom: 0;
-  }
-`;
-
-const FormControllersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 14%;
-`;
-
-const UploadAvatarContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  min-height: 150px;
-  padding-bottom: 10px;
-  box-sizing: border-box;
-  width: 100%;
-
-  & label {
-    width: 100%;
-  }
-
-  & span {
-    margin-left: auto;
-  }
-
-  & img {
-    border-radius: 50%;
-  }
-`;
+import * as S from './AddCommentStyles';
 
 const USER_DATA_MAX_LENGTH = 150;
 const USER_COMMENT_MAX_LENGTH = 3000;
@@ -89,12 +28,12 @@ const schema = yup.object().shape({
 }).required();
 
 const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
   });
 
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | null>(null);
   const [avatarView, setAvatarView] = useState('');
   const [author, setAuthor] = useState('');
   const [comment, setComment] = useState('');
@@ -104,7 +43,6 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
     if (selectedFile) {
       const objectUrl = URL.createObjectURL(selectedFile);
       setAvatarView(objectUrl);
-
 
       return () => URL.revokeObjectURL(objectUrl);
     }
@@ -125,15 +63,34 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
     callbacks[name](file ?? value);
   }
 
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    //onAddComment(data);
+
+    reset({
+      email: '',
+      author: '',
+      comment: '',
+      avatar: '',
+    });
+
+    if (avatarView) {
+      URL.revokeObjectURL(avatarView);
+      setAvatarView('');
+    }
+
+    setSelectedFile(null);
+    setAuthor('');
+    setComment('');
+    setEmail('');
+  }
+
   return (
-    <AddCommentContainer>
-      <CommentForm
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-          //onAddComment(data);
-        })}
+    <S.AddCommentContainer>
+      <S.CommentForm
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <UserDataContainer>
+        <S.UserDataContainer>
           <TextField
             {...register('email', { onChange: onChangeHandler })}
             value={email}
@@ -157,9 +114,9 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
             placeholder='Type your name'
           />
           <ErrorMessage errors={errors} name='author' />
-        </UserDataContainer>
+        </S.UserDataContainer>
 
-        <CommentInputContainer>
+        <S.CommentInputContainer>
           <TextField
             {...register('comment', { onChange: onChangeHandler })}
             value={comment}
@@ -173,11 +130,11 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
             placeholder='Share your opinion'
           />
           <ErrorMessage errors={errors} name='comment' />
-        </CommentInputContainer>
+        </S.CommentInputContainer>
 
 
-        <FormControllersContainer>
-          <UploadAvatarContainer>
+        <S.FormControllersContainer>
+          <S.UploadAvatarContainer>
             <Button
               variant='contained'
               component='label'
@@ -197,7 +154,7 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
             <img alt='' src={avatarView || logo} width={115} height={92} />
 
             <ErrorMessage errors={errors} name='avatar' />
-          </UploadAvatarContainer>
+          </S.UploadAvatarContainer>
 
           <LoadingButton
             variant='contained'
@@ -205,9 +162,9 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
           >
             Add comment
           </LoadingButton>
-        </FormControllersContainer>
-      </CommentForm>
-    </AddCommentContainer>
+        </S.FormControllersContainer>
+      </S.CommentForm>
+    </S.AddCommentContainer>
   );
 }
 
