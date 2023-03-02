@@ -5,7 +5,7 @@ const Comments = ({ comments }: IComments): JSX.Element => {
   return (
     <section>
       <ul>
-        {/*comments.map(comment => <Comment data={comment}/>)*/}
+        {/*comments.map(comment => <Comment data={comment} key={comment.id}/>)*/}
       </ul>
     </section>
   );

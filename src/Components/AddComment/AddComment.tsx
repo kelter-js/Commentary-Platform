@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { TextField } from '@mui/material';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FieldValues, useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Button from '@mui/material/Button';
 import { changeCallbackType, avatarSchemaType } from '../../types/types';
-import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { IAddComment } from '../../types/interfaces';
+import LoadingButton from '@mui/lab/LoadingButton';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import { TextField, Button } from '@mui/material';
 import logo from '../../assets/userpic.png';
 import * as S from './AddCommentStyles';
+import { v1 } from 'uuid';
 
 const USER_DATA_MAX_LENGTH = 150;
 const USER_COMMENT_MAX_LENGTH = 3000;
@@ -65,7 +65,13 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
-    //onAddComment(data);
+    /*onAddComment({
+      ...data,
+      avatar: avatarView,
+      raiting: 0,
+      date: new Date(),
+      id: v1(),
+    });*/
 
     reset({
       email: '',

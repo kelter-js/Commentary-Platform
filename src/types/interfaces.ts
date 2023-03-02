@@ -1,13 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface IWrapper { children: React.ReactNode }
-export interface IAddComment { onAddComment: Dispatch<SetStateAction<never[]>> }
-export interface ICommentData {
+export interface IComment {
   email: string;
   author: string;
   comment: string;
-  avatar: { "0": any }
+  avatar: string;
+  raiting: number;
+  date: number;
+  id: number,
 }
-export interface IComments {
-  comments: ICommentData[],
-}
+
+export interface IWrapper { children: React.ReactNode }
+export interface IAddComment { onAddComment: Dispatch<SetStateAction<never[]>> }
+export interface ICommentProps { data: IComment }
+export interface IComments { comments: IComment[] }
