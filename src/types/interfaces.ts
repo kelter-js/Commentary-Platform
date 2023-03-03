@@ -16,3 +16,8 @@ export interface IWrapper {
 export interface IAddComment { onAddComment: (value: IComment) => void }
 export interface ICommentProps { data: IComment }
 export interface IComments { comments: IComment[] | [] }
+export interface ITextToggler {
+  toggle: () => void;
+  shouldShow: boolean;
+  fullyHidden?: boolean;
+}

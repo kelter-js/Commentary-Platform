@@ -5,6 +5,7 @@ export const AddCommentContainer = styled.section`
   border: 1px solid black;
   margin: 15px;
   padding: 5px;
+  box-sizing: border-box;
 `;
 
 export const CommentForm = styled.form`
