@@ -9,7 +9,6 @@ const CommentsList = styled.ul`
   margin: 0 15px;
   padding: 0;
   list-style: none;
-  border: 1px solid black;
   overflow-y: auto;
 
   &::-webkit-scrollbar {

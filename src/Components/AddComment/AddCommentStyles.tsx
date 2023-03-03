@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const AddCommentContainer = styled.section`
-  border: 1px solid black;
   margin: 15px;
   padding: 5px;
   box-sizing: border-box;
