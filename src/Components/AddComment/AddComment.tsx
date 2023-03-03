@@ -8,7 +8,6 @@ import { IAddComment } from '../../types/interfaces';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { TextField, Button } from '@mui/material';
-import logo from '../../assets/userpic.png';
 import * as S from './AddCommentStyles';
 import VisuallyHidden from '../../Common/VisuallyHidden';
 import { v1 } from 'uuid';
@@ -27,6 +26,11 @@ const schema = yup.object().shape({
     }),
 }).required();
 
+/**
+ * return commentary creation form
+ * @param   {function} onAddComment callback to add commentary data into parent array of comments
+ * @return  {JSX.Element} form, including all fields to create commentary
+*/
 const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     mode: 'onSubmit',
@@ -160,7 +164,11 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
               />
             </Button>
 
-            <img alt='' src={avatarView || logo} width={115} height={92} />
+            {avatarView ? (
+              <img alt='' src={avatarView} width={115} height={92} />
+            ) : (
+              <S.AvatarPlaceholder />
+            )}
 
             <ErrorMessage errors={errors} name='avatar' />
           </S.UploadAvatarContainer>

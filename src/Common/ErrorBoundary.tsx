@@ -1,11 +1,13 @@
 import React from 'react';
 import Fallback from './Fallback';
+import { IReactChildrenProps, IErrorBoundaryState } from '../types/interfaces';
 
-interface IErrorBoundaryProps { children: React.ReactNode }
-interface IErrorBoundaryState { hasError: boolean }
-
-class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryState> {
-  constructor(props: IErrorBoundaryProps) {
+/**
+ * return React component, to catch any error in components below, in react tree
+ * @return  {JSX.Element} transparent component, which show childrens, or fallback UI
+*/
+class ErrorBoundary extends React.Component<IReactChildrenProps, IErrorBoundaryState> {
+  constructor(props: IReactChildrenProps) {
     super(props);
     this.state = { hasError: false }
   }

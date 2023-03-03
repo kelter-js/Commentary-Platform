@@ -6,6 +6,12 @@ import getTimeDescription from '../../utils/timeFormatter';
 import * as S from './CommentStyles';
 import { BAD_RAITING, MINUTE } from '../../utils/constants';
 
+
+/**
+ * return commentary item
+ * @param   {object} data commentary data, including all information to render comment UI
+ * @return  {JSX.Element} li of commentary, avatar, email, author name, creation date, text and raiting
+*/
 const Comment = ({ data }: ICommentProps): JSX.Element => {
   const [raiting, setRaiting] = useState(data.raiting);
   const [isReadMore, setIsReadMore] = useState(false);

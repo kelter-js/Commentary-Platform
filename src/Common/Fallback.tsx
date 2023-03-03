@@ -11,6 +11,10 @@ const ErrorContainer = styled.div`
   width: 100vw;
 `;
 
+/**
+ * return UI fallback, to show user, if any error occurred
+ * @return  {JSX.Element} fallback UI
+*/
 const Fallback = () => {
   return (
     <ErrorContainer>

@@ -25,7 +25,11 @@ const CommentsList = styled.ul`
     border-radius: 20px;
   }
 `;
-
+/**
+ * return list of comments
+ * @param   {array} comments list containing comments data
+ * @return  {JSX.Element} ul of Comment components representing commentaries
+*/
 const Comments = ({ comments }: IComments): JSX.Element => {
   return (
     <section>

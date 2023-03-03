@@ -1,3 +1,8 @@
+/**
+ * return time in human-readable format
+ * @param   {string} time initial time, since comment was created
+ * @return  {string} string with time description
+ */
 const getTimeDescription = (time: any) => {
   const currentTime = new Date();
 
