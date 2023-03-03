@@ -14,7 +14,7 @@ import VisuallyHidden from '../../Common/VisuallyHidden';
 import { v1 } from 'uuid';
 import { IComment } from '../../types/interfaces';
 
-const USER_DATA_MAX_LENGTH = 150;
+const USER_DATA_MAX_LENGTH = 100;
 const USER_COMMENT_MAX_LENGTH = 500;
 
 const schema = yup.object().shape({

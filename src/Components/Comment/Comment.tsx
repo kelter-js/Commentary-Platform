@@ -4,9 +4,32 @@ import { Button } from '@mui/material';
 import styled from 'styled-components';
 
 const CommentUserContainer = styled.div`
+  width: 15%;
+
+  & h3,
+  & p {
+    word-break: break-all;
+  }
+
+  & img {
+    border-radius: 50%;
+  }
 `;
 
 const CommentControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 9%;
+  text-align: center;
+
+  & .MuiButton-contained {
+    margin-right: 5px;
+  }
+
+  & .MuiButton-contained:last-of-type {
+    margin-right: 0;
+  }
 `;
 
 const CommentContainer = styled.li`
@@ -17,6 +40,14 @@ const CommentContainer = styled.li`
   & h3 {
     margin: 0;
   }
+`;
+
+const CommentText = styled.p`
+  flex-grow: 1;
+`;
+
+const Raiting = styled.p`
+  font-size: 50px;
 `;
 
 const Comment = ({ data }: ICommentProps): JSX.Element => {
@@ -36,18 +67,20 @@ const Comment = ({ data }: ICommentProps): JSX.Element => {
   return (
     <CommentContainer>
       <CommentUserContainer>
-        <h3>{data.author}</h3>
+        <h3>{data.author.slice(0, 50)}</h3>
         <img src={data.avatar} alt='' width={100} height={100} />
         <p>{data.email}</p>
         <p>{data.date.toString()}</p>
       </CommentUserContainer>
 
-      <p>{data.comment}</p>
+      <CommentText>{data.comment}</CommentText>
 
       <CommentControls>
-        <p>{raiting}</p>
-        <Button name='increment' onClick={onRaitingChange}>+</Button>
-        <Button name='decrement' onClick={onRaitingChange}>-</Button>
+        <Raiting>{raiting}</Raiting>
+        <div>
+          <Button variant="contained" name='increment' onClick={onRaitingChange}>+</Button>
+          <Button variant="contained" name='decrement' onClick={onRaitingChange}>-</Button>
+        </div>
       </CommentControls>
     </CommentContainer>
   );
