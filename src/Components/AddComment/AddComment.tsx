@@ -13,9 +13,7 @@ import * as S from './AddCommentStyles';
 import VisuallyHidden from '../../Common/VisuallyHidden';
 import { v1 } from 'uuid';
 import { IComment } from '../../types/interfaces';
-
-const USER_DATA_MAX_LENGTH = 100;
-const USER_COMMENT_MAX_LENGTH = 500;
+import { USER_DATA_MAX_LENGTH, USER_COMMENT_MAX_LENGTH } from '../../utils/constants';
 
 const schema = yup.object().shape({
   email: yup.string().max(USER_DATA_MAX_LENGTH).email().required(),
@@ -64,11 +62,14 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
   }
 
   const onSubmit = (data: FieldValues) => {
+    const date = new Date();
+    date.setDate(date.getDate() - 3);
+    console.log(date);
     onAddComment({
       ...data as IComment,
       avatar: avatarView,
       raiting: 0,
-      date: new Date(),
+      date,
       id: v1(),
     });
 

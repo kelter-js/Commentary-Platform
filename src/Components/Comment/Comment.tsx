@@ -1,66 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ICommentProps } from '../../types/interfaces';
 import { Button } from '@mui/material';
-import styled from 'styled-components';
 import TextToggler from '../../Common/TextToggler';
-
-const CommentUserContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 15%;
-
-  & h3,
-  & p {
-    word-break: break-all;
-  }
-
-  & img {
-    border-radius: 50%;
-  }
-`;
-
-const CommentControls = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 9%;
-  text-align: center;
-
-  & .MuiButton-contained {
-    margin-right: 5px;
-  }
-
-  & .MuiButton-contained:last-of-type {
-    margin-right: 0;
-  }
-`;
-
-const CommentContainer = styled.li`
-  display: flex;
-  padding: 5px;
-
-  & p,
-  & h3 {
-    margin: 0;
-  }
-`;
-
-const CommentText = styled.p`
-  width: 75%;
-  word-break: break-all;
-`;
-
-const Raiting = styled.p`
-  font-size: 50px;
-`;
-
-const BAD_RAITING = -10;
+import getTimeDescription from '../../utils/timeFormatter';
+import * as S from './CommentStyles';
+import { BAD_RAITING, MINUTE } from '../../utils/constants';
 
 const Comment = ({ data }: ICommentProps): JSX.Element => {
   const [raiting, setRaiting] = useState(data.raiting);
   const [isReadMore, setIsReadMore] = useState(false);
+  const [timeDescription, setTimeDescription] = useState(getTimeDescription(data.date));
 
   const onRaitingChange = (e: React.MouseEvent<HTMLElement>) => {
     const { name } = (e.target as HTMLButtonElement);
@@ -98,27 +47,33 @@ const Comment = ({ data }: ICommentProps): JSX.Element => {
     return text;
   }
 
-  console.log(raiting)
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimeDescription(getTimeDescription(data.date));
+    }, MINUTE);
+
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
-    <CommentContainer>
-      <CommentUserContainer>
-        <h3>{data.author.slice(0, 50)}</h3>
+    <S.CommentContainer>
+      <S.CommentUserContainer>
+        <h3>{data.author}</h3>
         <img src={data.avatar} alt='' width={100} height={100} />
         <p>{data.email}</p>
-        <p>{data.date.toString()}</p>
-      </CommentUserContainer>
+        <p>{timeDescription}</p>
+      </S.CommentUserContainer>
 
-      <CommentText>{getCommentText(data.comment)}</CommentText>
+      <S.CommentText>{getCommentText(data.comment)}</S.CommentText>
 
-      <CommentControls>
-        <Raiting>{raiting}</Raiting>
+      <S.CommentControls>
+        <S.Raiting>{raiting}</S.Raiting>
         <div>
           <Button variant='contained' name='increment' onClick={onRaitingChange}>+</Button>
           <Button variant='contained' name='decrement' onClick={onRaitingChange}>-</Button>
         </div>
-      </CommentControls>
-    </CommentContainer>
+      </S.CommentControls>
+    </S.CommentContainer>
   );
 }
 

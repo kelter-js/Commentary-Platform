@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MainContainer from './Components/Main';
+import MainContainer from './Common/Main';
 import VisuallyHidden from './Common/VisuallyHidden';
 import AddComment from './Components/AddComment/AddComment';
 import { IComment } from './types/interfaces';
