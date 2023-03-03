@@ -16,13 +16,17 @@ export const CommentUserContainer = styled.div`
   & img {
     border-radius: 50%;
   }
+
+  @media (max-width: 1300px)  {
+    width: 20%;
+  }
 `;
 
 export const CommentControls = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 9%;
+  width: 10%;
   text-align: center;
 
   & .MuiButton-contained {
@@ -31,6 +35,10 @@ export const CommentControls = styled.div`
 
   & .MuiButton-contained:last-of-type {
     margin-right: 0;
+  }
+
+  @media (max-width: 1300px)  {
+    width: 15%;
   }
 `;
 
@@ -46,6 +54,7 @@ export const CommentContainer = styled.li`
 
 export const CommentText = styled.p`
   width: 75%;
+  padding: 3px;
   word-break: break-all;
 `;
 

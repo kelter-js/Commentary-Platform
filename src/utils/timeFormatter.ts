@@ -9,14 +9,14 @@ const getTimeDescription = (time: any) => {
   const difference = currentTime.getTime() - time.getTime();
 
   if (difference < HOUR) {
-    return `${Math.round(difference / MINUTE)} minutes ago`;
+    return `${Math.round(difference / MINUTE)} minute(s) ago`;
   }
 
   if (difference < DAY) {
-    return `${Math.round(difference / HOUR)} hours ago`;
+    return `${Math.round(difference / HOUR)} hour(s) ago`;
   }
    
-  return `${Math.round(difference / DAY)} days ago`;
+  return `${Math.round(difference / DAY)} day(s) ago`;
 }
 
 export default getTimeDescription;

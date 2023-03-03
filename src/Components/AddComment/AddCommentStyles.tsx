@@ -19,6 +19,10 @@ export const CommentInputContainer = styled.div`
   & .MuiTextField-root {
     width: 100%;
   }
+
+  @media (max-width: 1300px)  {
+    width: 60%;
+  }
 `;
 
 export const UserDataContainer = styled.div`
@@ -38,6 +42,10 @@ export const FormControllersContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 14%;
+
+  @media (max-width: 1300px)  {
+    width: 16%;
+  }
 `;
 
 export const UploadAvatarContainer = styled.div`

@@ -21,6 +21,14 @@ const Comment = ({ data }: ICommentProps): JSX.Element => {
     return () => URL.revokeObjectURL(data.avatar);
   }, []);
 
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimeDescription(getTimeDescription(data.date));
+    }, MINUTE);
+
+    return () => clearInterval(timerId);
+  }, []);
+
   const toggleReadMore = () => {
     setIsReadMore((state) => !state);
   }
@@ -46,14 +54,6 @@ const Comment = ({ data }: ICommentProps): JSX.Element => {
 
     return text;
   }
-
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      setTimeDescription(getTimeDescription(data.date));
-    }, MINUTE);
-
-    return () => clearInterval(timerId);
-  }, []);
 
   return (
     <S.CommentContainer>

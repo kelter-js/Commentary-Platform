@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -33,6 +33,8 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
     resolver: yupResolver(schema),
   });
 
+  const inputElem = useRef();
+
   const [selectedFile, setSelectedFile] = useState<Blob | MediaSource | null>(null);
   const [avatarView, setAvatarView] = useState('');
   const [author, setAuthor] = useState('');
@@ -45,6 +47,13 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
       setAvatarView(objectUrl);
     }
   }, [selectedFile]);
+
+  useEffect(() => {
+    if (inputElem.current) {
+      const elem = inputElem.current as HTMLInputElement;
+      elem.focus();
+    }
+  }, [inputElem]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -62,14 +71,11 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
   }
 
   const onSubmit = (data: FieldValues) => {
-    const date = new Date();
-    date.setDate(date.getDate() - 3);
-    console.log(date);
     onAddComment({
       ...data as IComment,
       avatar: avatarView,
       raiting: 0,
-      date,
+      date: new Date(),
       id: v1(),
     });
 
@@ -101,7 +107,7 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
             label='Email'
             type='email'
             id='email'
-            inputProps={{ maxLength: USER_DATA_MAX_LENGTH }}
+            inputProps={{ maxLength: USER_DATA_MAX_LENGTH, ref: inputElem }}
             placeholder='Type your email'
           />
           <ErrorMessage errors={errors} name='email' />
