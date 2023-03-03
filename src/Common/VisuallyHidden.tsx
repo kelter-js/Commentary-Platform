@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { IWrapper } from '../types/interfaces';
 
@@ -19,5 +19,5 @@ const VisuallyHidden = ({ tag, children }: IWrapper): JSX.Element => {
   return (<Container>{children}</Container>);
 };
 
-export default VisuallyHidden;
+export default memo(VisuallyHidden);
 

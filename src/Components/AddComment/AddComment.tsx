@@ -12,6 +12,7 @@ import logo from '../../assets/userpic.png';
 import * as S from './AddCommentStyles';
 import VisuallyHidden from '../../Common/VisuallyHidden';
 import { v1 } from 'uuid';
+import { IComment } from '../../types/interfaces';
 
 const USER_DATA_MAX_LENGTH = 150;
 const USER_COMMENT_MAX_LENGTH = 500;
@@ -44,8 +45,6 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
     if (selectedFile) {
       const objectUrl = URL.createObjectURL(selectedFile);
       setAvatarView(objectUrl);
-
-      return () => URL.revokeObjectURL(objectUrl);
     }
   }, [selectedFile]);
 
@@ -65,14 +64,13 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
   }
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
-    /*onAddComment({
-      ...data,
+    onAddComment({
+      ...data as IComment,
       avatar: avatarView,
       raiting: 0,
       date: new Date(),
       id: v1(),
-    });*/
+    });
 
     reset({
       email: '',
@@ -81,15 +79,11 @@ const AddComment = ({ onAddComment }: IAddComment): JSX.Element => {
       avatar: '',
     });
 
-    if (avatarView) {
-      URL.revokeObjectURL(avatarView);
-      setAvatarView('');
-    }
-
     setSelectedFile(null);
     setAuthor('');
     setComment('');
     setEmail('');
+    setAvatarView('');
   }
 
   return (
